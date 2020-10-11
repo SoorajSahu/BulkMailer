@@ -1,4 +1,7 @@
-# `This is Bulk mailer especially  made in Node js, Electrone Js, HTML.
+# BulkMailer
+
+This is Bulk mailer especially  made in Node js, Electrone Js, HTML.
+
 # 🙏Please contribute on it.
 
 # Step1:-
