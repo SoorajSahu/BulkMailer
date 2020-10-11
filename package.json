@@ -1,0 +1,67 @@
+{
+  "productName": "Fevtree Mailer",
+  "version": "1.0.0",
+  "description": "Send Unlimited Mails ",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "echo \"No linting configured\""
+  },
+  "keywords": [],
+  "author": {
+    "name": "Surajack",
+    "email": "58561274+surajack12@users.noreply.github.com"
+  },
+  "license": "MIT",
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel"
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "bootstrap": "^5.0.0-alpha1",
+    "bulma": "^0.9.0",
+    "electron-squirrel-startup": "^1.0.0",
+    "email-crawler": "^1.0.4",
+    "express": "^4.17.1",
+    "imap-simple": "^5.0.0",
+    "jquery": "^3.5.1",
+    "mailpop3": "^0.1.0",
+    "multer": "^1.4.2",
+    "mysql": "^2.18.1",
+    "nodemailer": "^6.4.10",
+    "python-shell": "^2.0.1",
+    "simple-node-imap": "^2.0.3"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.51",
+    "@electron-forge/maker-deb": "^6.0.0-beta.51",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.51",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.51",
+    "@electron-forge/maker-zip": "^6.0.0-beta.51",
+    "electron": "9.0.5"
+  }
+}

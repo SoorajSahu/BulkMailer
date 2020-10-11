@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.0/css/bulma-rtl.css" integrity="sha512-mP0kn0Fy+Dx+jCC3K4yEJufzSHFhszy1LOE4YvUOuFt1xwELuJI9W55FbKUaLswXc18ptZH17I3b40fn2jBbhw==" crossorigin="anonymous" />
+    <script src="App.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Roboto&display=swap" rel="stylesheet">
+    <title></title>
+    <style>
+      
+        body{
+          font-family: 'Poppins', sans-serif;
+          font-family: 'Roboto', sans-serif;
+          background-color:white;
+        }
+        a{
+          text-decoration: none;
+        }
+      .modal {
+          display: none; /* Hidden by default */
+          position: fixed; /* Stay in place */
+          z-index: 1; /* Sit on top */
+          padding-top: 100px; /* Location of the box */
+          left: 0;
+          top: 0;
+          width: 100%; /* Full width */
+          height: 100%; /* Full height */
+          overflow: auto; /* Enable scroll if needed */
+          background-color: rgb(0,0,0); /* Fallback color */
+          background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.main {
+    width: 50%;
+    margin: 50px auto;
+}
+
+/* Bootstrap 4 text input with search icon */
+
+.has-search .form-control {
+    padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+}
+    </style>
+</head>
+
+<body>
+
+  <div class="row">
+    <div class="col-3 sidebar ml-2 pt-4 pr-1 " style="background-color: #f3f3f3;height: 35rem;">
+
+      <h2 class="p-1"> Artifex</h2>
+<aside class="menu">
+  <li style="list-style: none;">
+    <i id="hostName" class="justify" title="Host Using to Send Emails"></i>
+  </li>
+  <p class="menu-label">
+    Pages
+  </p>
+ <ul class="menu-list">
+  <li ><a onclick="showEmailsenders()" class=" ">Email Senders</a></li>
+  <li><a onclick="showSendmail()" class=" ">Send Mails </a></li>
+  <li><a onclick="users()" class=" ">Users</a></li>
+  <li><a onclick="addEmails()" class=" ">Add emails</a></li>
+  <li><a href="index.html"><button class="btn btn-info">Logout</button></a></li>
+  
+</ul>
+
+<script>
+  
+  document.getElementById('hostName').innerHTML = host;
+</script>
+
+</aside>
+    </div>
+    <div class="col" id="emailSender">
+
+    <div class="header bg-info p-2 text-white">
+
+
+      <h2>Email Id's Using For Send Mail</h2>
+    </div>
+    <table class="table border-info  ml-4"  >
+    <thead>
+            <tr>
+                <td><b>Id</b></td>
+                <td><b>Name</b></td>
+                <td><b>Email</b></td>
+                <td><b>Edit</b></td>
+            <tr>
+    </thead>
+    <tbody id="data">
+      
+
+
+
+      
+    </tbody>
+
+    </table>
+    <div class="text-center m-3">
+    <button onclick="showMod2()" class="btn btn-info ">Add New Email</button>
+    </div>
+
+
+<div id="myModal" class="modal">
+    
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div style="width: 100%; padding: 1rem 1rem 1rem 1rem;background-color: #f3f3f3; ">
+         
+      <span class="close" onclick="clearform(); hidemodel();" >&times;</span>
+      <h2 class="text-center text-gray">Update Details</h2>
+      </div>
+     <div style="padding: 20px;">
+      <form  method="post" id="updateForm">
+            <div class="form-group">
+                <label for="NAme">Name</label>
+              <input type="text" name="name"  class="form-control" id="NAme" required>
+            </div>        
+              <input type="hidden" name="sno" id="sno" required>
+            <div class="form-group">
+              <label for="EMail">Email</label>
+            <input type="text" name="email" class="form-control" id="EMail" required>
+            </div>
+          <div class="form-group">
+              <label for="PAss1">Password</label>
+            <input type="password" name="pass" class="form-control" id="PAss1" required>
+          </div>
+          <div class="form-group">
+              <label for="PAss2">Confirm Password</label>
+            <input  type="password"  class="form-control" id="PAss2" required>
+          </div><br>
+          <button type="submit" class="btn btn-outline-warning">Update</button>
+          <button id='deletereco' class="btn btn-outline-danger align-right">Delete record</button>
+  </form>
+  
+     </div>
+    </div>
+  
+  </div>
+
+  <div id="myModal2" class="modal">
+    
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div style="width: 100%; padding: 1rem 1rem 1rem 1rem;background-color: #f3f3f3; ">
+         
+      <span class="close" onclick=" hidemodel2();" >&times;</span>
+      <h2 class="text-center text-gray">Add New Email</h2>
+      </div>
+     <div style="padding: 20px;">
+      <form  method="post" id="newUser">
+            <div class="form-group">
+                <label for="NAme">Name</label>
+              <input type="text" name="name"  class="form-control" required>
+            </div>        
+             
+            <div class="form-group">
+              <label for="EMail">Email</label>
+            <input type="text" name="email" class="form-control"  required>
+            </div>
+          <div class="form-group">
+              <label for="PAss1">Password</label>
+            <input type="password" name="pass" class="form-control" required>
+          </div>
+          <div class="form-group">
+              <label for="PAss2">Confirm Password</label>
+            <input  type="password"  class="form-control"  required>
+          </div><br>
+          <button type="submit" class="btn btn-outline-warning">Add</button>
+          <button type="reset" class="btn btn-outline-danger align-right">Reset</button>
+  </form>
+  
+     </div>
+    </div>
+  
+  </div>
+
+ 
+    </div>
+    <div id="sendMails" class="col" style="display: none;">
+
+      <div class="bg-info p-2 text-white">
+        <h2>Send Mails</h2>
+      </div>
+      <table class="table border-info  ml-4"  >
+        <thead>
+                <tr>
+                    <td class="col-3" ><b>Mail Id</b></td>
+                    <td><b>Mail Subject</b></td>    
+                    <td><b>Edit Template</b></td>                 
+                <tr>
+        </thead>
+        <tbody id="mailData">
+          
+    
+    
+    
+          
+        </tbody>
+       <tr>
+       <td></td>
+       <td><button onclick="showMod4()" id="addnewtemplates" class="btn btn-success">Add New Template</button></td>
+       <td></td>
+
+       </tr>
+    
+        </table>
+        <div class="container container-fluid p-2">
+          <form id="SendTemplate" method="post">
+            
+            <input type="hidden" name="sendmail">
+
+            <button class="btn btn-info mt-2 mb-2">Send mail to all</button>
+          </form>
+          <button class="btn btn-warning text-right "  onclick="showResponse()">See Response/Hide Response</button>
+          <div class="container notification p-3 m-3" id="AllResponse" style="display: none;" ></div>
+        </div>
+
+    </div>
+    <script>
+      function showResponse()
+      {
+        
+        var resp = document.getElementById('AllResponse').style;
+        if(resp.display =='none'){
+          resp.display ='block';
+        }else{
+          resp.display ='none';
+        }
+      }
+
+
+      var temp1 = document.getElementById('etemp1');
+      var temp2 = document.getElementById('etemp2');
+
+      function hideTemp1(){
+        temp1.style.display = 'none';
+        temp2.style.display = 'block';
+      }
+      function hideTemp2(){
+        temp2.style.display = 'none';
+        temp1.style.display = 'block';
+      }
+    </script>    
+    <div id="users" class="col" style="display: none;">
+     
+      <div class="bg-info p-2 text-white">
+        <h2>All Recivers</h2>
+      </div>
+      <div class="text-right">
+        <button id="deleteAllUsers" title="Delete All The Emails" class="m-3   btn btn-outline-danger"><i class="material-icons">delete</i> </button>
+      </div>
+      <table class="table border-info  ml-4"  >
+        <thead>
+                <tr>
+                    <td class="col-3" ><b>Sno</b></td>
+                    <td><b>Email Id</b></td>               
+                    <td><b>Total Email send</b></td>               
+                <tr>
+        </thead>
+        <tbody id="mailRecivers">      
+    
+    
+    
+          
+        </tbody>
+    
+        </table>
+    
+    </div>
+    <div id="addemails" class="col" style="display: none;">
+      <div class="header bg-info p-2 text-white ">
+        <h2>        Add New Emails</h2>
+
+
+      </div>
+      
+      <div class="alert alert-info mt-3" role="alert">
+        
+        <h4 class="alert-heading"><b>Add New Emails By Searching Key Words.</b></h4>
+        <small class="mt-2">These Emails are Extracted from Google Search Results.(Don't forget to add  <b>@example.com</b>  after KeyWord)</small>
+
+      </div> 
+      <div class="main">
+  
+        <!-- Actual search box -->
+       
+        
+       <form  id="keywordForm" >
+      
+        <input type="text" name="keyword" class="form-control" required placeholder="Search key word">
+        <button onclick="showgif()" type="submit" class="btn btn-info text-center mt-3">Search</button>
+      </form>
+       
+      <img src="gif/YCZH.gif" alt="loading" title="Searching New Emails" id="loadgif" style="display: none;">       
+        
+
+      </div>
+      <div class=" alert alert-success " id="addemailresult" style="display: none;">
+        <p></p>
+      </div>
+      
+      
+    </div>
+
+
+  </div>
+   <script>
+     function showgif()
+    {
+     document.getElementById('loadgif').style.display='block';
+     document.getElementById('addemailresult').style.display='none';
+  
+    }
+   </script>
+  
+  <div id="myModal3" class="modal">
+    
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div style="width: 100%; padding: 1rem 1rem 1rem 1rem;background-color: #f3f3f3; ">
+         
+      <span class="close" onclick="hidemodel3()" >&times;</span>
+      <h2 class="text-center text-gray">Edit Email Template</h2>
+      </div>
+     <div style="padding: 20px;">
+      <form  method="post" id="editEmailTemplate">
+                  
+             
+       
+          <div class="form-group">
+              <label for="EmailSub">Email Subject</label>
+            <input type="text" id="EmailSub" name="subject" class="form-control" required>
+            <input type="hidden" name="temp_id" id="temp_id" >
+          </div>
+          <div class="form-group">
+              <label for="TemplHTML">Email Body</label>
+            <textarea name="mail_template" id="TemplHTML" class="form-control" cols="30" rows="8" required></textarea>
+          </div><br>
+          <button type="submit" class="btn btn-outline-warning">Upadate</button>
+          <button type="reset" id="deleteTemplate" class="btn btn-outline-danger align-right">Delete</button>
+  </form>
+  
+     </div>
+    </div>
+  
+  </div>
+
+
+  <div id="myModal4" class="modal">
+    
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div style="width: 100%; padding: 1rem 1rem 1rem 1rem;background-color: #f3f3f3; ">
+         
+      <span class="close" onclick="hidemodel4()" >&times;</span>
+      <h2 class="text-center text-gray">Edit Email Template</h2>
+      </div>
+     <div style="padding: 20px;">
+      <form  method="post" id="newEmailTemplate">
+                  
+             
+       
+          <div class="form-group">
+              <label for="EmailSub">Email Subject</label>
+            <input type="text" id="EmailSub" name="subject" class="form-control" required>
+           
+          </div>
+          <div class="form-group">
+              <label for="TemplHTML"></label>
+            <textarea name="mail_template" id="TemplHTML" class="form-control" cols="30" rows="8" required></textarea>
+          </div><br>
+          <button type="submit" class="btn btn-outline-warning">Save</button>
+          <button type="reset" class="btn btn-outline-danger align-right">Reset</button>
+  </form>
+  
+     </div>
+    </div>
+  
+  </div>
+
+
+
+
+
+    <script >
+
+
+
+
+  // append an element to parent
+  function modelValue(sno,name,email,pass)
+    {  
+        document.getElementById('sno').value   =sno;
+        document.getElementById('NAme').value  =name;
+        document.getElementById('EMail').value =email;
+        document.getElementById('PAss1').value =pass;
+        document.getElementById('PAss2').value =pass;
+    }
+
+   
+    var modal = document.getElementById("myModal");
+    var modal2 = document.getElementById("myModal2");
+    var modal3 = document.getElementById("myModal3");
+    var modal4 = document.getElementById("myModal4");
+
+// Get the button that opens the modal
+
+
+
+
+
+// When the user clicks the button, open the modal 
+ function showMod() {
+  modal.style.display = "block";
+}
+function showMod2() {
+  modal2.style.display = "block";
+}
+function showMod3() {
+  modal3.style.display = "block";
+}
+function showMod4() {
+  modal4.style.display = "block";
+}
+
+function clearform(){
+    // $('#updateForm').val('');
+    document.getElementById('sno').value='';
+}
+
+// When the user clicks on <span> (x), close the modal
+ function hidemodel() {
+  modal.style.display = "none";
+}
+function hidemodel2() {
+  modal2.style.display = "none";
+}
+function hidemodel3() {
+  modal3.style.display = "none";
+}
+function hidemodel4() {
+  modal4.style.display = "none";
+}
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+  if (event.target == modal2) {
+    modal2.style.display = "none";
+  }
+  if (event.target == modal3) {
+    modal3.style.display = "none";
+  }
+  if (event.target == modal4) {
+    modal4.style.display = "none";
+  }
+
+}
+
+    </script>
+
+</body>
+</html>
