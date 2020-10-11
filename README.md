@@ -1,3 +1,6 @@
+# `This is Bulk mailer especially  made in Node js, Electrone Js, HTML.
+# 🙏Please contribute on it.
+
 # Step1:-
     Create database and insert tables
 
